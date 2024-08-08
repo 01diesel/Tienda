@@ -3,14 +3,15 @@ package com.tienda.domain;
 import lombok.Data;
 import java.io.Serializable;
 import jakarta.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "categoria")
 
-public class Categoria implements Serializable{
-    
-private static final long serialVersionUID = 1L;
+public class Categoria implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_categoria")
@@ -19,6 +20,10 @@ private static final long serialVersionUID = 1L;
     private String descripcion;
     private String rutaImagen;
     private boolean activo;
+    
+    @OneToMany
+    @JoinColumn(name = "id_categoria", updatable = false)
+    List<Producto> productos;
 
     public Categoria() {
     }
@@ -28,5 +33,3 @@ private static final long serialVersionUID = 1L;
         this.activo = activo;
     }
 }
-
-
